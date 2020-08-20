@@ -1,0 +1,103 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+<h1 class="text-center"><b>Online IPv4 Subnet Calculator</b></h1>
+
+<div class="col-md-2 col-md-offset-5">
+<center>
+<br>
+<form method='POST' action=''>{% csrf_token %}
+{% bootstrap_form form layout='inline' %}
+{% buttons %}
+<button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "glyphicon glyphicon-ok" %} Submit
+    </button>
+  {% endbuttons %}  
+</form>
+
+</center>
+</div>
+
+{% if test == 8 %}
+<div class="col-md-6 col-md-offset-3">
+<div class="panel panel-primary">
+  <div class="panel-body">
+  <b><h4 class="text-center">IP address / Network mask </h4></b>
+<b><h4 class="text-center">    {{ ip_a }} /  {{ net }} </h4></b>
+<center>Network class:  {{ klasa }} </center>
+  </div>
+  <div class="panel-footer">
+  
+  
+  <table class="table table-hover">
+  <tbody>
+    <tr>
+      <td><center><b>Network address:</b></center></td>
+      <td><center>{{ adr_sieci }}</center></td>
+      <td><center><b>Broadcast:</b></center></td>
+      <td><center>{{ broad }}</center></td>
+    </tr>
+    <tr>
+      <td><center><b>First host:</b></center></td>
+      <td><center>{{ first_host }}</center></td>
+      <td><center><b>Last host:</b></center></td>
+      <td><center>{{ last_host }}</center></td>
+    </tr>
+    <tr>
+      <td><center><b>Max hosts number:</b></center></td>
+      <td><center>{{ host_max }}</center></td>
+      <td><center><b>Max subnets number:</b></center></td>
+      <td><center>{{ net_max }}</center></td>
+    </tr>
+  </tbody>
+</table>
+  
+  
+  </div>
+</div>
+</div>
+{% endif %}
+
+{% if test == 6 %}
+<div class="col-md-6 col-md-offset-3">
+<div class="panel panel-primary">
+  <div class="panel-body">
+  <center><b>IP address / Network mask </center></b>
+<center>    {{ ip_a }} /  {{ net }} </center>
+<center>Point to point </center>
+  </div>
+  <div class="panel-footer">
+
+
+  <table class="table table-hover">
+  <tbody>
+    <tr>
+      <td><center><b>First host:</b></center></td>
+      <td><center>{{ first_host }}</center></td>
+      <td><center><b>Last host:</b></center></td>
+      <td><center>{{ last_host }}</center></td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </div>
+</div>
+</div>
+{% endif %}
+
+<div class="col-md-6 col-md-offset-3">
+{% if test == -1 %}
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+  <strong>I think we have a problem :  </strong><b>"  {{ blad }} " </b> is not valid
+  ip address
+</div>
+</div>
+
+{% endif %}
+
+{% endblock content %}
